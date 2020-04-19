@@ -110,11 +110,12 @@ resource "aws_autoscaling_group" "default" {
   vpc_zone_identifier       = var.subnet_ids
   max_size                  = var.max_number_of_instances
   min_size                  = var.min_number_of_instances
-  desired_capacity          = var.desired_number_of_instances
+  desired_capacity          = var.min_number_of_instances
   health_check_grace_period = 300
   health_check_type         = "EC2"
 
   lifecycle {
     create_before_destroy = true
+    ignore_changes = [desired_capacity]
   }
 }

@@ -23,19 +23,13 @@ variable "instance_type" {
 variable "max_number_of_instances" {
   description = "AWS EC2 autoscaling group max size."
   type        = number
-  default     = 1
+  default     = 2
 }
 
 variable "min_number_of_instances" {
   description = "AWS EC2 autoscaling group min size."
   type        = number
-  default     = 1
-}
-
-variable "desired_number_of_instances" {
-  description = "AWS EC2 autoscaling group desired capacity."
-  type        = number
-  default     = 1
+  default     = 2
 }
 
 variable "instance_root_volume_size" {

@@ -22,10 +22,6 @@ variable "min_number_of_instances" {
   type = number
 }
 
-variable "desired_number_of_instances" {
-  type = number
-}
-
 variable "instance_root_volume_size" {
   type = number
 }
