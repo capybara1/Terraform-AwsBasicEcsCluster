@@ -49,35 +49,35 @@ resource "aws_security_group" "instance" {
 }
 
 data "aws_iam_policy_document" "instance" {
-    statement {
-        actions = ["sts:AssumeRole"]
+  statement {
+    actions = ["sts:AssumeRole"]
 
-        principals {
-            type        = "Service"
-            identifiers = ["ec2.amazonaws.com"]
-        }
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"]
     }
+  }
 }
 
 resource "aws_iam_role" "instance" {
-    name                = "${var.prefix}-Instance"
-    path                = "/"
-    assume_role_policy  = data.aws_iam_policy_document.instance.json
+  name               = "${var.prefix}-Instance"
+  path               = "/"
+  assume_role_policy = data.aws_iam_policy_document.instance.json
 }
 
 resource "aws_iam_role_policy_attachment" "container_service_role_to_instance_policy" {
-    role       = aws_iam_role.instance.name
-    policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+  role       = aws_iam_role.instance.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
 
 resource "aws_iam_instance_profile" "instance" {
-    name = "${var.prefix}-Instance"
-    path = "/"
-    role = aws_iam_role.instance.id
+  name = "${var.prefix}-Instance"
+  path = "/"
+  role = aws_iam_role.instance.id
 
-    provisioner "local-exec" {
-      command = "sleep 10"
-    }
+  provisioner "local-exec" {
+    command = "sleep 10"
+  }
 }
 
 resource "aws_launch_configuration" "instance" {
@@ -116,6 +116,6 @@ resource "aws_autoscaling_group" "default" {
 
   lifecycle {
     create_before_destroy = true
-    ignore_changes = [desired_capacity]
+    ignore_changes        = [desired_capacity]
   }
 }
