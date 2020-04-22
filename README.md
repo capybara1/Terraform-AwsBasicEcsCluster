@@ -1,3 +1,5 @@
+![CI](https://github.com/capybara1/Terraform-AwsBasicEcsCluster/workflows/CI/badge.svg)
+
 # AWS Basic ECS Cluster
 
 Terraform module for a basic AWS ECS cluster with EC2 backing.
